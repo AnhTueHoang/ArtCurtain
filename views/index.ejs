@@ -1,2 +1,50 @@
-<h1>Welcome to Art Curtain!</h1>
-<p>Elevate your space with Art Curtain - Where Every Fabric Unveils a Tale of Elegance and Artistry!</p>
+<table>
+    <tr>
+        <td width="85%">
+            <h1>Welcome to Art Curtain!</h1>
+            <p>Elevate your space with Art Curtain - Where Every Fabric Unveils a Tale of Elegance and Artistry!</p>
+
+            <% if (allrecs.length > 0) {%>
+                <% allrecs.forEach((recref, index) => { %>
+                    <product>
+                        <form action="/catalog/add" method="post" >
+                            <input type="hidden" name="product_id" value=<%= recref.product_id %> >
+                            <table>
+                                <tr> <td colspan="2"><%= recref.productname %></td></tr>
+                                <tr> <td colspan="2"><img src="/images/<%= recref.prodimage %>" width="200" height="85"></td></tr>
+                                <tr> <td colspan="2"><label><%= recref.description %></label></td></tr>
+                                <tr> <td><%= recref.prodcolor %></td><td><%= recref.saleprice %></td></tr>
+                                <tr> <td><%= recref.package_id %></td> <td><%= recref.category_id %></td></tr>
+                                <tr> <td><%= recref.status %></td>
+                                    <td><a href='/product/<%= recref.product_id %>/show'>Details</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Quantity: 
+                                        <select name="qty" required>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="more">Contact us for more!</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="submit" class="button1">Add to Cart</button></td>
+                                </tr>
+                                
+                            </table>
+                        </form>
+                    </product>
+                <% }); %>
+            <% } else { %>
+                <p>No Records Available</p>
+            <% } %>
+        </td>
+        <td width="20%">
+            <% promos.forEach((recref, index) => { %>
+                <figure> <img src="/images/<%= recref.promoimage %>" style="width: 200px; height: auto;"> </figure>
+            <% }); %>
+        </td>
+
+    </tr>
+</table>

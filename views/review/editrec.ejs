@@ -1,0 +1,21 @@
+<h1> Edit Review</h1>
+<form action="/review/save" method="post">
+    <input type="hidden" name="review_id" value="<%= onerec.review_id %>" >
+    <table>
+        <tr> <td> Customer ID: </td> <td> <input type="number" name="customer_id" value="<%= onerec.customer_id %>" required> </td> </tr>
+        <tr> <td> Product ID: </td> <td> <input type="number" name="product_id" value="<%= onerec.product_id %>" required> </td> </tr>
+        <tr> <td> Review Date: </td> <td> <input type="date" name="reviewdate" value="<%= onerec.description %>" required> </td>
+        </tr>
+        </tr>
+        <tr> <td> Comments: </td> <td> <textarea name="comments" rows="10" cols="30"><%= onerec.comments %></textarea> </td>
+        </tr>
+        <tr> <td> Rating: </td> <td> <input type="number" name="rating" value="<%= onerec.warn %>" required> </td> </tr>
+        <tr> <td> Status: </td> <td> <select name="status" required>
+        <option selected><%= onerec.status %></option>
+        <option>Publish</option>
+        <option>Unpublish</option>
+        <option>On Hold</option>
+        </select> </td> </tr>
+    </table>
+    <button type="submit">Save</button>
+</form>

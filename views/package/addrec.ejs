@@ -1,0 +1,15 @@
+<h1> New Record</h1>
+<form action="/package" method="post">
+<table>
+    <tr> <td> Package Name: </td> <td> <input type="text" name="packagename" required> </td> </tr>
+    <tr> <td> Quantity: </td> <td> <input type="number" name="qtyincluded" required> </td> </tr>
+    <tr> <td> Package Style: </td> <td> <textarea name="packagestyle" rows="10" cols="30"
+    placeholder="packagestyle"></textarea> </td> </tr>
+    <tr> <td> Status: </td> <td> <select name="status" required>
+    <option selected disabled>Choose Status</option>
+    <option>Available</option>
+    <option>Discontinued</option>
+    <option>Coming Soon</option>
+    </select> </td> </tr>
+</table>
+<button type="submit">Save</button>

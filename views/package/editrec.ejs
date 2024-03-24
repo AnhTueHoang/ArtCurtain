@@ -1,0 +1,18 @@
+<h1> Edit Package</h1>
+<form action="/package/save" method="post">
+    <input type="hidden" name="package_id" value="<%= onerec.package_id %>" >
+    <table>
+        <tr> <td> Package Name: </td> <td> <input type="text" name="packagename" value="<%= onerec.packagename %>" required> </td> </tr>
+        <tr> <td> Quantity: </td> <td> <input type="number" name="qtyincluded" value="<%= onerec.qtyincluded %>" required> </td> </tr>
+        <tr> <td> Package Style: </td> <td> <textarea name="packagestyle" rows="10" cols="30"><%= onerec.packagestyle %></textarea> </td>
+        </tr>
+        </tr>
+        <tr> <td> Status: </td> <td> <select name="status" required>
+        <option selected><%= onerec.status %></option>
+        <option>Available</option>
+        <option>Contingent</option>
+        <option>Coming Soon</option>
+        </select> </td> </tr>
+    </table>
+    <button type="submit">Save</button>
+</form>

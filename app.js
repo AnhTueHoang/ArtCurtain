@@ -4,11 +4,50 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var layouts = require('express-ejs-layouts');
+const dotenv = require('dotenv');
+dotenv.config();
+const session = require('express-session');
+
+
+const mariadb = require('mariadb/callback');
+const db = mariadb.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT
+});
+// connect to database
+db.connect((err) => {
+  if (err) {
+    console.log("Unable to connect to database due to error: " + err);
+    res.render('error');
+  } else {
+    console.log("Connected to DB");
+  }
+});
+global.db = db;
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var aboutRouter = require('./routes/about');
 var contactRouter = require('./routes/contact');
+var privacyRouter = require('./routes/privacy');
+var helpRouter = require('./routes/help');
+var productRouter = require('./routes/product');
+var customerRouter = require('./routes/customer');
+var categoryRouter = require('./routes/category');
+var packageRouter = require('./routes/package');
+var saleorderRouter = require('./routes/saleorder');
+var orderdetailRouter = require('./routes/orderdetail');
+var reviewRouter = require('./routes/review');
+var subscriptionRouter = require('./routes/subscription');
+var searchRouter = require('./routes/search');
+var reportsRouter = require('./routes/report');
+var catalogRouter = require('./routes/catalog');
+
 
 var app = express();
 
@@ -17,6 +56,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(layouts);
+
+app.use(session({secret: 'ArtCurtainAppSecret'}));
+app.use(function(req,res,next){
+  res.locals.session = req.session;
+  next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,6 +73,19 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
+app.use('/privacy', privacyRouter);
+app.use('/help', helpRouter);
+app.use('/product', productRouter);
+app.use('/customer', customerRouter);
+app.use('/category', categoryRouter);
+app.use('/package', packageRouter);
+app.use('/saleorder', saleorderRouter);
+app.use('/orderdetail', orderdetailRouter);
+app.use('/review', reviewRouter);
+app.use('/subscription', subscriptionRouter);
+app.use('/search', searchRouter);
+app.use('/report', reportsRouter);
+app.use('/catalog', catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
