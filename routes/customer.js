@@ -124,7 +124,7 @@ router.post('/', function(req, res, next) {
                     console.log(err);
                     res.render('error');
                 } else {
-                    res.redirect('/customer');
+                    res.render('customer/login', {message: "Account created successfully. Please login."});
                 }
             });
         });
