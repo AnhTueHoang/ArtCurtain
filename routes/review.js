@@ -54,7 +54,7 @@ router.get('/:recordid/show', function(req, res, next) {
 // ==================================================
 // Route to show empty form to obtain input form end-user.
 // ==================================================
-router.get('/addrecord', adminonly, function(req, res, next) {
+router.get('/addrecord', function(req, res, next) {
     res.render('review/addrec');
 });
 
@@ -63,7 +63,7 @@ router.get('/addrecord', adminonly, function(req, res, next) {
 // ==================================================
 // Route to obtain user input and save in database.
 // ==================================================
-router.post('/', adminonly, function(req, res, next) {
+router.post('/', function(req, res, next) {
     let insertquery = "INSERT INTO review (customer_id, product_id, reviewdate, comments, rating, status) VALUES (?, ?, now(), ?, ?, 'Review')";
     db.query(insertquery,[req.body.customer_id, req.body.product_id, req.body.comments, req.body.rating],(err, result) => {
         if (err) {
@@ -79,7 +79,7 @@ router.post('/', adminonly, function(req, res, next) {
 // ==================================================
 // Route to edit one specific record.
 // ==================================================
-router.get('/:recordid/edit', adminonly, function(req, res, next) {
+router.get('/:recordid/edit', function(req, res, next) {
     let query = "SELECT review_id, customer_id, product_id, reviewdate, comments, rating, status FROM review WHERE review_id = "
     + req.params.recordid;
     // execute query
