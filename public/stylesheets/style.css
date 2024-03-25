@@ -59,6 +59,8 @@ li a.active {
 .reviewbutton {
   background-color: #beb63a;
   font-size: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border-radius: 4px;
   border: 2px solid #2f225e;
   -webkit-transition-duration: 0.4s; /* Safari */
